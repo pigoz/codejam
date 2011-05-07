@@ -9,6 +9,22 @@ rescue LoadError
   exit
 end
 
+task :build do
+  system "gem build codejam.gemspec"
+end
+
+task :install => :build do
+  system "gem install codejam-#{CodeJam::VERSION}.gem"
+end
+
+task :clear do
+  File.delete File.join(Dir.pwd, "codejam-#{CodeJam::VERSION}.gem")
+end
+
+task :release => :build do
+  system "gem push codejam-#{CodeJam::VERSION}"
+end
+
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = 'spec/**/*_spec.rb'
   t.rspec_opts = ['--color']
