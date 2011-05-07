@@ -22,7 +22,7 @@ task :clear do
 end
 
 task :release => :build do
-  system "gem push codejam-#{CodeJam::VERSION}"
+  system "gem push codejam-#{CodeJam::VERSION}.gem"
 end
 
 RSpec::Core::RakeTask.new(:spec) do |t|
